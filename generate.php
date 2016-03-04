@@ -1,5 +1,20 @@
-class GenerateCrestIndex 
+<?php
+
+namespace Mogul\Jobs;
+
+use App\Jobs\Job;
+use Illuminate\Contracts\Bus\SelfHandling;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Mogul\Models\EVEItem;
+use Carbon\Carbon;
+use Sentinel;
+use DB;
+use \Cache;
+use RunningStat\RunningStat;
+
+class GenerateCrestIndex extends Job implements SelfHandling
 {
+    use DispatchesJobs;
     public $typeids;
     public $dataarray;
     public $indexName;
@@ -184,3 +199,4 @@ class GenerateCrestIndex
     }
 
 }
+
