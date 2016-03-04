@@ -1,4 +1,4 @@
-var CrestIndex = Vue.extend({
+var vm = new Vue({
     http: {
         root: '/root',
         headers: {
@@ -6,16 +6,14 @@ var CrestIndex = Vue.extend({
           'Authorization': 'Bearer ' + $("meta[name=jwt]").attr("content")
         }
       },
-    template: '#crest-index-template',
+    el: '#vue',
 
-    data: function()
+    data: 
     {
-        return {
-            chartData: [],
-            chartLabels: [],
-            myLineChart: null,
-            typeIDs: []
-        }
+        chartData: [],
+        chartLabels: [],
+        myLineChart: null,
+        typeIDs: []
     },
     events:
     {
@@ -105,7 +103,7 @@ var CrestIndex = Vue.extend({
             });
         },
         addSeries: function(typeIDs, slug) {
-            var resource = this.$resource('/api/hangar/crestindex/');
+            var resource = this.$resource('/api/public/crestindex/');
             //this.$dispatch('loadingStart');
             resource.get({typeIDs: typeIDs, 'indexName': slug}, function (data, status, request) {
                 dataarray = JSON.stringify(data);
@@ -139,6 +137,11 @@ var CrestIndex = Vue.extend({
         {
             arr = [40519,40520,2833,32792,32793, 29668];
             this.addSeries(arr, 'Plex/Aur/MTC/Skill');
+        },
+        getTech3: function()
+        {
+            arr = [30270, 30269, 30254, 30248, 30271, 30018, 30022, 30268, 30259, 30021, 30251, 30019, 30258, 30252, 30614, 30615, 30618, 30599, 30600, 30605, 30582, 30586, 30588, 30752, 30753, 34412, 34414, 34416, 30754, 30628, 30632, 30633, 30187, 30558, 30562, 30375, 30376, 30377, 30370, 30378, 30371, 30372, 30373, 30374];
+            this.addSeries(arr, 'Tech 3');
         },
         getPI: function()
         {
